@@ -14,7 +14,15 @@ pipeline {
         stage('Build') { 
             steps {
                 script {
-                    sh './mvnw package' 
+                    sh './mvnw package -DskipTests' 
+                }
+            }
+        }
+
+        stage('Test') { 
+            steps {
+                script {
+                    sh './mvnw test' 
                 }
             }
         }
