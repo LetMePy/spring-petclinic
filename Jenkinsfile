@@ -34,15 +34,6 @@ pipeline {
             }
         }
 
-        stage('Ansible') {
-            steps {
-                /* Move the Ansible playbook execution directly within the stage */
-                script {
-                    sh 'ansible-playbook kubectl-setup-playbook.yaml'
-                }
-            }
-        }
-
         stage('Deploy') {
             steps {
                  script {
