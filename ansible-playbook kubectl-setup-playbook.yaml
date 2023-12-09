@@ -1,0 +1,13 @@
+---
+- name: Installing and Configuring Kubectl
+  hosts: localhost
+  gather_facts: no
+  become: yes
+  become_user: root
+  tasks:
+    - name: Download the latest release
+      shell: curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    - name: Install Kubectl
+      shell: install -m 0755 kubectl /usr/local/bin/kubectl
+    - name: Download Kubeconfig
+      shell: curl -sL "https://go.knts.app/link/cm5okm27ahjpRXXd7" -o /root/.kube/config
