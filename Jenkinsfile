@@ -2,6 +2,12 @@
 
 pipeline {
     agent any
+    
+    environment {
+        DOCKER_REGISTRY = 'skandersoltane'
+        DOCKER_REPO = 'petclinic'
+        DOCKER_IMAGE_TAG = 'latest'
+    }
 
     stages {
 
@@ -13,22 +19,18 @@ pipeline {
             }
         }
 
-        stage('Build image') {
+        stage('Build and Push Docker Image') {
             steps {
-                /* This builds the actual image; synonymous to
-                * docker build on the command line */
-                app = docker.build('skandersoltane/petclinic')
-            }
-        }
+                script {
+                    def dockerImage = "${DOCKER_REGISTRY}/${DOCKER_REPO}:${DOCKER_IMAGE_TAG}"
 
-        stage('Push image') {
-            /* Finally, we'll push the image with two tags:
-            * First, the incremental build number from Jenkins
-            * Second, the 'latest' tag.
-            * Pushing multiple tags is cheap, as all the layers are reused. */
-            docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-id') {
-                app.push("${env.BUILD_NUMBER}")
-                app.push('latest')
+                    // Build Docker image
+                    sh "docker build -t ${dockerImage} ."
+
+                    // Push Docker image to DockerHub
+                    sh "docker login -u skandersoltane -p kDXbX2GEQfy93et"
+                    sh "docker push ${dockerImage}"
+                }
             }
         }
 
