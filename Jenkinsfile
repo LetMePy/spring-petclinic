@@ -4,6 +4,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Build') { 
             steps {
                 script {
@@ -13,9 +14,11 @@ pipeline {
         }
 
         stage('Build image') {
-            /* This builds the actual image; synonymous to
-            * docker build on the command line */
-            app = docker.build('skandersoltane/petclinic')
+            steps {
+                /* This builds the actual image; synonymous to
+                * docker build on the command line */
+                app = docker.build('skandersoltane/petclinic')
+            }
         }
 
         stage('Push image') {
