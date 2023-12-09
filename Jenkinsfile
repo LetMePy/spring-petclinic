@@ -35,17 +35,21 @@ pipeline {
         }
 
         stage('Ansible') {
-            /* Move the Ansible playbook execution directly within the stage */
-            script {
-                sh 'ansible-playbook kubectl-setup-playbook.yaml'
+            steps {
+                /* Move the Ansible playbook execution directly within the stage */
+                script {
+                    sh 'ansible-playbook kubectl-setup-playbook.yaml'
+                }
             }
         }
 
         stage('Deploy') {
-            script {
-                sh """
-                    kubectl set image deployment/petclinic-deployment petclinic=skandersoltane/petclinic:"${env.BUILD_NUMBER}"
-                """
+            steps {
+                 script {
+                    sh """
+                        kubectl set image deployment/petclinic-deployment petclinic=skandersoltane/petclinic:"${env.BUILD_NUMBER}"
+                    """
+                }
             }
         }
     }
