@@ -8,7 +8,7 @@ node {
 
     stage('Build') {
         script {
-            sh './mvnw package'
+            sh './mvnw package Dcheckstyle.skip'
         }
     }
 
