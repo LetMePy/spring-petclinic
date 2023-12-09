@@ -38,7 +38,7 @@ pipeline {
             steps {
                  script {
                     sh """
-                        kubectl set image deployment/petclinic-deployment petclinic=skandersoltane/petclinic:"${env.BUILD_NUMBER}"
+                        kubectl set image deployment/petclinic-deployment petclinic=skandersoltane/petclinic:latest
                     """
                 }
             }
