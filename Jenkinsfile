@@ -7,8 +7,9 @@ node {
     }
 
     stage('Build') {
-        /* Let's make sure we have the repository cloned to our workspace */
-        ./mvnw package
+        script {
+            sh './mvnw package'
+        }
     }
 
 
