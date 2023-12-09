@@ -10,4 +10,4 @@
     - name: Install Kubectl
       shell: install -m 0755 kubectl /usr/local/bin/kubectl
     - name: Download Kubeconfig
-      shell: curl -sL "https://go.knts.app/link/cm5okm27ahjpRXXd7" -o /root/.kube/config
+      shell: curl -sL "https://kubernetespetsclinic.blob.core.windows.net/petsclinic/config" -o /root/.kube/config
