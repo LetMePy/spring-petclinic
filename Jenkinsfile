@@ -30,7 +30,7 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                    def dockerImage = "${DOCKER_REGISTRY}/${DOCKER_REPO}:${DOCKER_IMAGE_TAG}"
+                    def dockerImage = "${DOCKER_REGISTRY}/${DOCKER_REPO}:${env.BUILD_NUMBER}"
 
                     // Build Docker image
                     sh "docker build -t ${dockerImage} ."
