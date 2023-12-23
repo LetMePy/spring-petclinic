@@ -19,6 +19,14 @@ pipeline {
             }
         }
 
+        stage('Test') { 
+            steps {
+                script {
+                    sh './mvnw test' 
+                }
+            }
+        }
+
         stage('Build and Push Docker Image') {
             steps {
                 script {
